@@ -1,0 +1,16 @@
+name,number,building,floor,capacity,type
+Lecture Hall A,101,EHU University,1,150,LECTURE_HALL
+Lecture Hall B,102,EHU University,1,120,LECTURE_HALL
+Computer Lab 1,201,EHU University,2,30,COMPUTER_LAB
+Computer Lab 2,202,EHU University,2,30,COMPUTER_LAB
+Classroom 301,301,EHU University,3,40,CLASSROOM
+Classroom 302,302,EHU University,3,40,CLASSROOM
+Classroom 401,401,EHU University,4,35,CLASSROOM
+Seminar Room 402,402,EHU University,4,20,SEMINAR_ROOM
+Lab 303,303,EHU University,3,25,LABORATORY
+Lab 304,304,EHU University,3,25,LABORATORY
+Lecture Hall C,103,EHU University,1,100,LECTURE_HALL
+Classroom 501,501,Savanoriu 28,5,45,CLASSROOM
+Computer Lab 3,203,Savanoriu 28,2,35,COMPUTER_LAB
+Seminar Room 403,403,Savanoriu 28,4,25,SEMINAR_ROOM
+Classroom 305,305,Savanoriu 28,3,40,CLASSROOM
