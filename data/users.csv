@@ -26,3 +26,7 @@ tg_id,group_name,is_admin
 123456024,22-LR-JS,false
 123456025,,false
 123456026,,false
+123456001,25-HR-JA,false
+597449123,23-LR-JA,true
+123456010,24-LR-JA,false
+123456015,23-HR-CS,false

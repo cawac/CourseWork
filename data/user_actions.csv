@@ -14,3 +14,6 @@ tg_id,action_type,command_name,timestamp,metadata
 597449123,COMMAND,/my_stats,2026-06-04 10:00:00,
 123456001,COMMAND,/tomorrow,2026-06-04 15:00:00,
 123456001,API_CALL,get_lessons_by_date,2026-06-04 15:00:01,"{""search_date"": ""2026-06-05""}"
+597449123,REGISTRATION,,2026-06-01 10:00:00,
+123456001,COMMAND,/today,2026-06-02 11:05:00,
+597449123,COMMAND,/week,2026-06-03 08:30:00,

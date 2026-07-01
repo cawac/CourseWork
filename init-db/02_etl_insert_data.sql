@@ -3,10 +3,32 @@ FROM '/tmp/database_export/lesson_time.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY auditoriums(name, auditorium_number, building, floor, capacity, type)
+CREATE TEMPORARY TABLE temp_auditoriums (
+    name VARCHAR(100),
+    auditorium_number VARCHAR(20),
+    building VARCHAR(100),
+    floor INTEGER,
+    capacity INTEGER,
+    type auditorium_type
+);
+
+COPY temp_auditoriums(name, auditorium_number, building, floor, capacity, type)
 FROM '/tmp/database_export/auditoriums.csv'
 DELIMITER ','
 CSV HEADER;
+
+INSERT INTO auditoriums(name, auditorium_number, building, floor, capacity, type)
+SELECT DISTINCT ON (building, auditorium_number)
+    name,
+    auditorium_number,
+    building,
+    floor,
+    capacity,
+    type
+FROM temp_auditoriums
+ORDER BY building, auditorium_number;
+
+DROP TABLE temp_auditoriums;
 
 CREATE TEMPORARY TABLE temp_users_for_groups (
     tg_id INTEGER,
@@ -26,14 +48,14 @@ FROM temp_users_for_groups
 WHERE group_name IS NOT NULL AND group_name != ''
 ORDER BY group_name;
 
-
 INSERT INTO users(tg_id, group_id, is_admin)
-SELECT
+SELECT DISTINCT ON (tu.tg_id)
     tu.tg_id,
     g.id,
     tu.is_admin
 FROM temp_users_for_groups tu
-LEFT JOIN groups g ON tu.group_name = g.name;
+LEFT JOIN groups g ON tu.group_name = g.name
+ORDER BY tu.tg_id, tu.is_admin DESC;
 
 DROP TABLE temp_users_for_groups;
 
@@ -103,14 +125,15 @@ CSV HEADER
 NULL '';
 
 INSERT INTO user_actions(user_id, action_type, command_name, timestamp, metadata)
-SELECT
+SELECT DISTINCT ON (u.id, tua.action_type, tua.timestamp)
     u.id,
     tua.action_type,
     tua.command_name,
     tua.timestamp,
     tua.metadata
 FROM temp_user_actions tua
-JOIN users u ON tua.tg_id = u.tg_id;
+JOIN users u ON tua.tg_id = u.tg_id
+ORDER BY u.id, tua.action_type, tua.timestamp;
 
 DROP TABLE temp_user_actions;
 
